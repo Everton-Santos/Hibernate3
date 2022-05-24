@@ -1,19 +1,21 @@
 package util;
 
-import java.lang.module.Configuration;
 import java.util.Properties;
-
-import javax.imageio.spi.ServiceRegistry;
 
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
+import org.hibernate.cfg.Configuration;
 import org.hibernate.cfg.Environment;
+import org.hibernate.service.ServiceRegistry;
 
 import model.Bebe;
 import model.Bebe_Medico;
 import model.Mae;
 import model.Medico;
 import model.Residente;
+
+
+
 
 public class HibernateUtil {
 	
@@ -49,6 +51,5 @@ public class HibernateUtil {
 		}
 		return sessionFactory;
 	}
-
 
 }
