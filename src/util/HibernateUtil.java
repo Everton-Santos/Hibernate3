@@ -5,6 +5,10 @@ import java.util.Properties;
 
 import javax.imageio.spi.ServiceRegistry;
 
+import org.hibernate.SessionFactory;
+import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
+import org.hibernate.cfg.Environment;
+
 import model.Bebe;
 import model.Bebe_Medico;
 import model.Mae;
