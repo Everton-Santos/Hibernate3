@@ -1,0 +1,50 @@
+package util;
+
+import java.lang.module.Configuration;
+import java.util.Properties;
+
+import javax.imageio.spi.ServiceRegistry;
+
+import model.Bebe;
+import model.Bebe_Medico;
+import model.Mae;
+import model.Medico;
+import model.Residente;
+
+public class HibernateUtil {
+	
+	private static SessionFactory sessionFactory;
+	
+	public static SessionFactory getSessionFactory() {
+		if (sessionFactory == null) {
+			try {
+				Configuration configuration = new Configuration();
+				Properties prop = new Properties();
+				prop.put(Environment.DRIVER, "com.mysql.cj.jdbc.Driver");
+				prop.put(Environment.URL, "jdbc:mysql://localhost:3306/exercicio1?createDatabaseIfNotExist=true");
+				prop.put(Environment.USER, "root");
+				prop.put(Environment.PASS, "P4ssw0rd");
+				prop.put(Environment.DIALECT, "org.hibernate.dialect.MySQLDialect");
+				prop.put(Environment.SHOW_SQL, "true");
+				prop.put(Environment.HBM2DDL_AUTO, "update");
+				
+				configuration.addProperties(prop);
+				configuration.addAnnotatedClass(Bebe_Medico.class);
+				configuration.addAnnotatedClass(Bebe.class);
+				configuration.addAnnotatedClass(Mae.class);
+				configuration.addAnnotatedClass(Medico.class);
+				configuration.addAnnotatedClass(Residente.class);
+				
+				ServiceRegistry registry = new StandardServiceRegistryBuilder()
+											.applySettings(configuration.getProperties())
+											.build();
+				sessionFactory = configuration.buildSessionFactory(registry);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return sessionFactory;
+	}
+
+
+}
